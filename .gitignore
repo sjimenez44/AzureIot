@@ -99,3 +99,4 @@ __queuestorage__
 __azurite_db*__.json
 
 package-lock.json
+app.config
