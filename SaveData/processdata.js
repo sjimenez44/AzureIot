@@ -5,17 +5,19 @@ const Humidity = require('../modules/data/Humidity');
 const sensorrcv = new Sensor();
 
 exports.processdata = function(message) {
-  let sensor = { value: 0, format: 'none' };
+  let sensor = { id: message.id, type: null, scale: null, value: 0 };
   switch (message.type) {
     case 'temperature':
+      sensor.type = 'temperature';
+      sensor.scale = 'fahrenheit';
       sensor.value = sensorrcv
         .formatter(new Temperature(message.value));
-      sensor.format = 'fahrenheit';
       break;
     case 'humidity':
+      sensor.type = 'humidity';
+      sensor.scale = 'percentage';
       sensor.value = sensorrcv
         .formatter(new Humidity(message.value));
-      sensor.format = 'percentage';
       break;
     default:
       break;
